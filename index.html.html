@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hull Council of Disabled People</title>
+  <style>
+    :root {
+      --primary-blue: #1d529e;
+      --dark-blue: #143a70;
+      --light-bg: #f4f7f9;
+      --text-color: #333333;
+      --white: #ffffff;
+      --sidebar-width: 260px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 20px;
+      position: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--white);
+      padding-bottom: 10px;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      display: block;
+      padding: 12px 15px;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active {
+      background-color: var(--dark-blue);
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .content-area {
+      padding: 40px;
+      flex: 1;
+      max-width: 900px;
+    }
+
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    /* Home Page & Cards */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-container img {
+      max-width: 250px;
+      height: auto;
+    }
+
+    .info-card {
+      background: var(--white);
+      padding: 25px;
+      border-radius: 8px;
+      border-left: 6px solid var(--primary-blue);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .info-card h3 {
+      color: var(--primary-blue);
+      margin-bottom: 12px;
+    }
+
+    /* Services & Resources Cards */
+    .service-item, .resource-item {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .service-item h3, .resource-item h3 {
+      color: var(--primary-blue);
+      margin-bottom: 8px;
+    }
+
+    .resource-item h3 a {
+      color: var(--primary-blue);
+      text-decoration: underline;
+    }
+
+    .resource-item h3 a:hover {
+      color: var(--dark-blue);
+    }
+
+    /* Tables & Forms */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      margin-top: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+
+    form {
+      background: var(--white);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button, .paypal-btn {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover, .paypal-btn:hover {
+      background-color: var(--dark-blue);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: var(--white);
+      padding: 25px 40px;
+      margin-top: auto;
+    }
+
+    footer p {
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar">
+    <h2>HCDP Menu</h2>
+    <nav>
+      <ul>
+        <li><a href="#" class="nav-link active" onclick="showPage('home', event)">Home</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('services', event)">Services We Offer</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('resources', event)">Helpful Resources</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('opening-times', event)">Opening Times</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('volunteer', event)">Volunteer Application</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('donate', event)">Donate</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content View -->
+  <div class="main-content">
+    <div class="content-area">
+      
+      <!-- Home Page -->
+      <section id="home" class="page-section active">
+        <div class="logo-container">
+          <img src="logo.png" alt="Hull Council of Disabled People Logo">
+        </div>
+        
+        <div class="info-card">
+          <h3>Our Mission</h3>
+          <p>The objective of the Hull Council of Disabled People is to provide a means of consolidation and co-operation amongst both disabled and able-bodied people. We aim to promote the welfare of disabled and vulnerable individuals, advance their education, further their health, and relieve poverty in any way deemed charitable by law.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Our History</h3>
+          <p>The Hull Council of Disabled People (HCDP) is a charitable organisation serving the needs of disabled and vulnerable people in the Hull area. It was conceived during the International year of Disabled people in 1981, and opened its centre at 35 Ferensway in 1983. This multifunctional centre is the base for promoting independent living for people with disabilities in the Hull area.</p>
+        </div>
+      </section>
+
+      <!-- Services We Offer Page -->
+      <section id="services" class="page-section">
+        <h2 style="margin-bottom: 20px;">Services We Offer</h2>
+        
+        <div class="service-item">
+          <h3>Benefits & Welfare Rights</h3>
+          <p>If you require help with filling in forms or enquiring what benefits you are entitled to, our Welfare Rights workers will be happy to help.</p>
+          <p style="margin-top: 10px;"><strong>To make an appointment please contact us on (01482) 326140.</strong></p>
+        </div>
+
+        <div class="service-item">
+          <h3>Cafeteria & Social Centre</h3>
+          <p>Midday meals, teas and light refreshments are provided throughout the day. Our Buffet Service caters for parties by arrangement.</p>
+        </div>
+
+        <div class="service-item">
+          <h3>Wheelchair Loan</h3>
+          <p>Wheelchairs are available for hire for just £10 per week OR £2.50 per day. A deposit of £15 is required and this will be paid back to you when you bring the wheelchair back.</p>
+          <p style="margin-top: 5px;">We can deliver wheelchairs to you for £3 within a 4 mile radius of our centre.</p>
+        </div>
+
+        <div class="service-item">
+          <h3>Zimmer Frame Loan</h3>
+          <p>Zimmer frames are also available for hire for just £3.50 per week. A deposit of £10 is required and this will be paid back to you when you return the Zimmer frame.</p>
+        </div>
+
+        <div class="service-item">
+          <h3>Bric-A-Brac</h3>
+          <p>If you have anything you would like to donate to help us raise funds by selling in our Bric a Brac shop, please bring it in or ask if we could collect by phoning or emailing us.</p>
+        </div>
+      </section>
+
+      <!-- External Links & Resources Page -->
+      <section id="resources" class="page-section">
+        <h2 style="margin-bottom: 20px;">Helpful Support Links</h2>
+        <p style="margin-bottom: 20px;">Below are links to partner charities and external support organisations for mental health and disability support:</p>
+
+        <div class="resource-item">
+          <h3><a href="https://www.mind.org.uk/" target="_blank" rel="noopener noreferrer">MIND</a></h3>
+          <p>A leading mental health charity in England and Wales which works to create a better life for everyone with experience of mental distress.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.cmt.org.uk/" target="_blank" rel="noopener noreferrer">CMT UK</a></h3>
+          <p>A major charity which supports people with Charcot-Marie-Tooth disease, a form of Hereditary Motor and Sensory Neuropathy.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.mencap.org.uk/" target="_blank" rel="noopener noreferrer">MENCAP</a></h3>
+          <p>A major charity which supports people with Learning Disabilities.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.clothingsolutions.org.uk/" target="_blank" rel="noopener noreferrer">Clothing Solutions for Disabled People</a></h3>
+          <p>A project which aims to both understand and meet the custom clothing needs of disabled people.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.disabilitysport.org.uk/" target="_blank" rel="noopener noreferrer">Sports Forum for the Disabled</a></h3>
+          <p>Dedicated to promoting and developing accessible sporting activities for disabled people.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.sightsupport.org/" target="_blank" rel="noopener noreferrer">Sight Support HULL & East Yorkshire (Formerly HERIB)</a></h3>
+          <p>Helps and supports the changing needs of people with sight loss in the Hull & East Riding area and raises funds to ensure vital support services continue.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.remap.org.uk/" target="_blank" rel="noopener noreferrer">REMAP</a></h3>
+          <p>A national charity which designs and builds custom-made equipment for people with disabilities.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.scope.org.uk/" target="_blank" rel="noopener noreferrer">Scope</a></h3>
+          <p>A UK disability equality charity offering practical advice, information, and support for disabled people and their families.</p>
+        </div>
+      </section>
+
+      <!-- Opening Times Page -->
+      <section id="opening-times" class="page-section">
+        <h2>Opening Times</h2>
+        <p>Our drop-in center and services are available during the following public opening hours:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Monday</td><td>8:00 AM – 3:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>8:00 AM – 3:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>8:00 AM – 3:00 PM</td></tr>
+            <tr><td>Thursday</td><td>8:00 AM – 3:00 PM</td></tr>
+            <tr><td>Friday</td><td>8:00 AM – 2:00 PM</td></tr>
+            <tr><td>Saturday</td><td>Closed</td></tr>
+            <tr><td>Sunday</td><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Volunteer Page -->
+      <section id="volunteer" class="page-section">
+        <h2>Volunteer Application</h2>
+        <p style="margin-bottom: 15px;">Fill out your details below to submit an application directly to our team via email.</p>
+        <form onsubmit="sendEmail(event)">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Why would you like to volunteer?</label>
+            <textarea id="message" rows="5" required></textarea>
+          </div>
+          <button type="submit">Submit Application</button>
+        </form>
+      </section>
+
+      <!-- Donation Page -->
+      <section id="donate" class="page-section">
+        <h2>Support Our Cause</h2>
+        <p style="margin-bottom: 20px;">Your contributions directly help us support disabled and vulnerable individuals across Hull and surrounding areas.</p>
+        <div style="background: white; padding: 25px; border-radius: 8px;">
+          <h3>Donate via PayPal</h3>
+          <p style="margin: 10px 0 20px 0;">Online PayPal integration is coming soon. Once linked, clicking the button below will route directly to our PayPal charity gateway.</p>
+          <button class="paypal-btn" onclick="alert('PayPal integration pending charity setup details.')">Donate with PayPal</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer Area -->
+    <footer>
+      <p><strong>Hull Council of Disabled People</strong></p>
+      <p>Registered Charity Number: 1082470</p>
+      <p>Address: 35/37 Ferensway, Hull, East Yorkshire, HU2 8NA</p>
+      <p>Phone: (01482) 326140 | Email: <a href="mailto:hcdp@hcdp.karoo.co.uk" style="color:#aaa;">hcdp@hcdp.karoo.co.uk</a></p>
+    </footer>
+  </div>
+
+  <script>
+    function showPage(pageId, event) {
+      if (event) event.preventDefault();
+      
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => section.classList.remove('active'));
+      
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      document.getElementById(pageId).classList.add('active');
+      if (event) event.currentTarget.classList.add('active');
+    }
+
+    function sendEmail(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+
+      const subject = encodeURIComponent("Volunteer Application - " + name);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMotivation:\n${message}`
+      );
+
+      window.location.href = `mailto:hcdp@hcdp.karoo.co.uk?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
