@@ -96,6 +96,13 @@
       display: block;
     }
 
+    .subtitle-note {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+
     /* Home Page & Cards */
     .logo-container {
       text-align: center;
@@ -103,7 +110,8 @@
     }
 
     .logo-container img {
-      max-width: 250px;
+      max-width: 400px; /* Made bigger */
+      width: 100%;
       height: auto;
     }
 
@@ -142,6 +150,46 @@
 
     .resource-item h3 a:hover {
       color: var(--dark-blue);
+    }
+
+    /* Location & Gallery Layout */
+    .map-container {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .map-container img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    .address-header {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     /* Tables & Forms */
@@ -229,6 +277,9 @@
       .main-content {
         margin-left: 0;
       }
+      .logo-container img {
+        max-width: 280px;
+      }
     }
   </style>
 </head>
@@ -241,6 +292,8 @@
       <ul>
         <li><a href="#" class="nav-link active" onclick="showPage('home', event)">Home</a></li>
         <li><a href="#" class="nav-link" onclick="showPage('services', event)">Services We Offer</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('location', event)">Where to Find Us</a></li>
+        <li><a href="#" class="nav-link" onclick="showPage('events', event)">Upcoming Events</a></li>
         <li><a href="#" class="nav-link" onclick="showPage('resources', event)">Helpful Resources</a></li>
         <li><a href="#" class="nav-link" onclick="showPage('opening-times', event)">Opening Times</a></li>
         <li><a href="#" class="nav-link" onclick="showPage('volunteer', event)">Volunteer Application</a></li>
@@ -272,7 +325,8 @@
 
       <!-- Services We Offer Page -->
       <section id="services" class="page-section">
-        <h2 style="margin-bottom: 20px;">Services We Offer</h2>
+        <h2 style="margin-bottom: 5px;">Services We Offer</h2>
+        <p class="subtitle-note">Please note: All service prices may be subject to change.</p>
         
         <div class="service-item">
           <h3>Benefits & Welfare Rights</h3>
@@ -286,19 +340,48 @@
         </div>
 
         <div class="service-item">
-          <h3>Wheelchair Loan</h3>
-          <p>Wheelchairs are available for hire for just £10 per week OR £2.50 per day. A deposit of £15 is required and this will be paid back to you when you bring the wheelchair back.</p>
-          <p style="margin-top: 5px;">We can deliver wheelchairs to you for £3 within a 4 mile radius of our centre.</p>
+          <h3>Wheelchair Hire</h3>
+          <p>Wheelchairs are available for hire for £15 per week OR £4 per day. A deposit of £20 is required (refundable upon return).</p>
+          <p style="margin-top: 5px;">We can deliver wheelchairs to your home for a £10 delivery fee.</p>
         </div>
 
         <div class="service-item">
-          <h3>Zimmer Frame Loan</h3>
-          <p>Zimmer frames are also available for hire for just £3.50 per week. A deposit of £10 is required and this will be paid back to you when you return the Zimmer frame.</p>
+          <h3>Mobility Scooter Hire</h3>
+          <p>A yearly membership fee of £10 applies. Scooter hire is £5 per day, available from 8:00 AM to 2:45 PM.</p>
         </div>
 
         <div class="service-item">
-          <h3>Bric-A-Brac</h3>
+          <h3>Zimmer Frames</h3>
+          <p>Zimmer frames are available to buy directly from our center. Contact us for current stock and prices.</p>
+        </div>
+
+        <div class="service-item">
+          <h3>Bric-A-Brac Shop</h3>
           <p>If you have anything you would like to donate to help us raise funds by selling in our Bric a Brac shop, please bring it in or ask if we could collect by phoning or emailing us.</p>
+        </div>
+      </section>
+
+      <!-- Where to Find Us Page -->
+      <section id="location" class="page-section">
+        <h2 style="margin-bottom: 20px;">Where to Find Us</h2>
+        <div class="map-container">
+          <img src="map.jpg" alt="Map showing 75 Ferensway location">
+          <p class="address-header">Address: 75 Ferensway, Hull HU2 8LD</p>
+        </div>
+
+        <h3>Our Center & Shop</h3>
+        <div class="gallery-grid">
+          <img src="storefront1.jpg" alt="HCDP Storefront View 1">
+          <img src="storefront2.jpg" alt="HCDP Storefront View 2">
+          <img src="interior.jpg" alt="HCDP Shop Interior">
+        </div>
+      </section>
+
+      <!-- Upcoming Events Page -->
+      <section id="events" class="page-section">
+        <h2>Upcoming Events</h2>
+        <div class="info-card" style="margin-top: 20px;">
+          <p>We host events for Halloween and Christmas, details will be posted when finalised.</p>
         </div>
       </section>
 
@@ -310,6 +393,17 @@
         <div class="resource-item">
           <h3><a href="https://www.mind.org.uk/" target="_blank" rel="noopener noreferrer">MIND</a></h3>
           <p>A leading mental health charity in England and Wales which works to create a better life for everyone with experience of mental distress.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.citizensadvice.org.uk/" target="_blank" rel="noopener noreferrer">Citizens Advice</a></h3>
+          <p>Free, confidential, and independent advice on benefits, rights, debt, and consumer issues.</p>
+        </div>
+
+        <div class="resource-item">
+          <h3><a href="https://www.hcandl.co.uk/libraries" target="_blank" rel="noopener noreferrer">Hull Libraries</a></h3>
+          <p class="subtitle-note" style="color: var(--primary-blue); font-weight: bold; margin-bottom: 5px;">Hull Library provides bus passes for people that are disabled and over pension age.</p>
+          <p>Access library services, community support, and travel scheme applications.</p>
         </div>
 
         <div class="resource-item">
@@ -328,11 +422,6 @@
         </div>
 
         <div class="resource-item">
-          <h3><a href="https://www.disabilitysport.org.uk/" target="_blank" rel="noopener noreferrer">Sports Forum for the Disabled</a></h3>
-          <p>Dedicated to promoting and developing accessible sporting activities for disabled people.</p>
-        </div>
-
-        <div class="resource-item">
           <h3><a href="https://www.sightsupport.org/" target="_blank" rel="noopener noreferrer">Sight Support HULL & East Yorkshire (Formerly HERIB)</a></h3>
           <p>Helps and supports the changing needs of people with sight loss in the Hull & East Riding area and raises funds to ensure vital support services continue.</p>
         </div>
@@ -341,17 +430,13 @@
           <h3><a href="https://www.remap.org.uk/" target="_blank" rel="noopener noreferrer">REMAP</a></h3>
           <p>A national charity which designs and builds custom-made equipment for people with disabilities.</p>
         </div>
-
-        <div class="resource-item">
-          <h3><a href="https://www.scope.org.uk/" target="_blank" rel="noopener noreferrer">Scope</a></h3>
-          <p>A UK disability equality charity offering practical advice, information, and support for disabled people and their families.</p>
-        </div>
       </section>
 
       <!-- Opening Times Page -->
       <section id="opening-times" class="page-section">
         <h2>Opening Times</h2>
-        <p>Our drop-in center and services are available during the following public opening hours:</p>
+        <p class="subtitle-note">These are standard opening hours but may be subject to change as all our staff are volunteers and availability varies.</p>
+        
         <table>
           <thead>
             <tr>
@@ -364,11 +449,13 @@
             <tr><td>Tuesday</td><td>8:00 AM – 3:00 PM</td></tr>
             <tr><td>Wednesday</td><td>8:00 AM – 3:00 PM</td></tr>
             <tr><td>Thursday</td><td>8:00 AM – 3:00 PM</td></tr>
-            <tr><td>Friday</td><td>8:00 AM – 2:00 PM</td></tr>
+            <tr><td>Friday</td><td>8:00 AM – 3:00 PM</td></tr>
             <tr><td>Saturday</td><td>Closed</td></tr>
             <tr><td>Sunday</td><td>Closed</td></tr>
           </tbody>
         </table>
+        
+        <p class="subtitle-note" style="margin-top: 15px; font-weight: bold;">* Please note: We close early for Christmas holidays.</p>
       </section>
 
       <!-- Volunteer Page -->
@@ -413,7 +500,7 @@
     <footer>
       <p><strong>Hull Council of Disabled People</strong></p>
       <p>Registered Charity Number: 1082470</p>
-      <p>Address: 35/37 Ferensway, Hull, East Yorkshire, HU2 8NA</p>
+      <p>Address: 75 Ferensway, Hull, HU2 8LD</p>
       <p>Phone: (01482) 326140 | Email: <a href="mailto:hcdp@hcdp.karoo.co.uk" style="color:#aaa;">hcdp@hcdp.karoo.co.uk</a></p>
     </footer>
   </div>
